@@ -1,0 +1,26 @@
+.sharing-services
+  .navigation
+    ul
+      li.email
+        a(href="#") ✉️
+      li.facebook
+        a(href="#") F
+      li.twitter
+        a(href="#") T
+      li.others
+        a(href="#") 🔗
+
+  .services
+    .service
+      .sender
+        ' From
+        span james@buyapowa.com
+      .recipient
+        input(type="email" placeholder="Email address")
+      .message
+        textarea
+          = "To my good friend,\n\n"
+          = "Please buy the things here:\n\n"
+          = "http://the.things/abc"
+      .action
+        button Send email

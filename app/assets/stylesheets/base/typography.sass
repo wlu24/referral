@@ -1,0 +1,21 @@
+@mixin type-style-default
+  font-family: $font-family-default
+  font-size: $font-size-default
+  font-weight: $font-weight-default
+  line-height: $line-height-default
+
+@mixin type-style-large
+  font-family: $font-family-default
+  font-size: $font-size-large
+  font-weight: $font-weight-large
+  line-height: $line-height-large
+
+  @include media-query($desktop-screen)
+    font-size: $font-size-large-desktop
+
+body
+  @include type-style-default
+
+h1
+  @include type-style-large
+

@@ -1,0 +1,48 @@
+@mixin sharing-services
+  background: $grey-color
+
+  .services
+    padding: $grid-gutter-width
+
+    .service
+      .sender,
+      .recipient,
+      .message
+        margin-bottom: $grid-gutter-width
+
+      .sender
+        span
+          font-weight: $font-weight-bold
+          margin-left: $grid-gutter-width
+
+      .message
+        textarea
+          height: 160px
+
+
+  .navigation
+    ul
+      display: flex
+
+      li
+        flex: 1
+        height: $input-height
+
+        a
+          height: 100%
+          color: #ffffff
+          text-decoration: none
+          display: flex
+          justify-content: center
+          align-items: center
+          font-weight: $font-weight-bold
+          font-size: $font-size-medium
+
+        &.email
+          background: $email-color
+        &.facebook
+          background: $facebook-color
+        &.twitter
+          background: $twitter-color
+        &.others
+          background: $others-color

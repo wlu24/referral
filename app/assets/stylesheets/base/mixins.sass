@@ -1,0 +1,6 @@
+$tablet-screen: "(min-width: 768px) and (max-width: 1023px)"
+$desktop-screen: "(min-width: 1024px)"
+
+@mixin media-query($media)
+    @media only screen and #{$media}
+        @content
