@@ -3,6 +3,8 @@
 @import "embed/welcome"
 @import "embed/sharing_services"
 
+@import "embed/activity_feed"
+
 #embed
   @include media-query($desktop-screen)
     height: 100%
@@ -34,23 +36,65 @@
       @include media-query($desktop-screen)
         grid-row: 1 / 1
 
-    .share-link
-      @include share-link
-      grid-column: span 12
-      grid-row: auto
+    // .share-link
+    //   @include share-link
+    //   grid-column: span 12
+    //   grid-row: auto
+    //
+    //   @include media-query($desktop-screen)
+    //     grid-column: span 6
+    //     grid-row: 2 / 2
+    //
+    // .welcome
+    //   @include welcome
+    //   grid-column: span 12
+    //   grid-row: auto
+    //
+    //   @include media-query($desktop-screen)
+    //     grid-column: span 6
+    //     grid-row: 3 / 3
+    #left_row_two_container
+      grid-column: span 6
+      grid-row: 2 / 2
 
-      @include media-query($desktop-screen)
-        grid-column: span 6
-        grid-row: 2 / 2
+      .share-link
+        @include share-link
 
-    .welcome
-      @include welcome
-      grid-column: span 12
-      grid-row: auto
+      .welcome
+        @include welcome
 
-      @include media-query($desktop-screen)
-        grid-column: span 6
-        grid-row: 3 / 3
+      .activity_feed
+
+    // .share-link
+    //   @include share-link
+    //   grid-column: span 12
+    //   grid-row: auto
+    //
+    //   @include media-query($desktop-screen)
+    //     grid-column: span 6
+    //     grid-row: 2 / 2
+    //
+    // .welcome
+    //   @include welcome
+    //   grid-column: span 12
+    //   grid-row: auto
+    //
+    //   @include media-query($desktop-screen)
+    //     grid-column: span 6
+    //     grid-row: 3 / 3
+
+
+    // .activity_feed
+    //   @include activity-feed
+    //   grid-column: span 12
+    //   grid-row: auto
+    //
+    //   @include media-query($desktop-screen)
+    //     grid-column: span 6
+    //     grid-row: 3 / 5
+
+
+
 
     .sharing-services
       @include sharing-services

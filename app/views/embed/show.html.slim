@@ -1,8 +1,14 @@
 #embed
   .content
-    / = render "primary_title"
+    = render "primary_title"
     / = render "share_link"
     / = render "welcome"
-    / = render "sharing_services"
+    #left_row_two_container
+      = render "share_link"
+      = render "welcome"
+      = render "activity_feed"
+
+    = render "sharing_services"
+
 
 / = javascript_pack_tag "embed"
