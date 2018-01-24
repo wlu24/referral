@@ -1,13 +1,15 @@
 require "rails_helper"
 
 RSpec.describe Referral, type: :model do
-  let(:sender) { User.new(name: 'Alex Chen', email: 'ac@mail.com') }
-  let(:recipient) { User.new(name: 'Bob Lin', email: 'bl@mail.com') }
+  let(:sender) { FactoryBot.build_stubbed(:user) }
+  let(:recipient) { FactoryBot.build_stubbed(:user, name: 'Bob Lin', email: 'bl@mail.com') }
+  let(:referral) { FactoryBot.build_stubbed(:referral, from_user: sender,
+                            to_user: recipient, referral_token: 'abcde') }
+
+  let(:self_referral) {FactoryBot.build_stubbed(:referral, from_user: sender,
+                            to_user: sender, referral_token: '12345')}
 
   describe 'initialization' do
-    let(:referral) { Referral.new(from_user: sender, to_user: recipient,
-                                  referral_token: 'abcde') }
-
     it 'knows who the sender is' do
       expect(referral.sender).to eq('Alex Chen')
     end
@@ -25,25 +27,20 @@ RSpec.describe Referral, type: :model do
   describe 'referral status' do
 
     context 'user send a referral to herself' do
-      let(:referral) { Referral.new(from_user: sender, to_user: sender,
-                                    referral_token: 'abcde') }
-
       it 'detects self referrals' do
-        expect(referral).to be_a_self_referral
+        expect(self_referral).to be_a_self_referral
       end
     end
 
     context 'recipient clicks the referral link' do
-      let(:referral) { Referral.new(from_user: sender, to_user: recipient,
-                                    referral_token: 'abcde') }
 
       it 'knows the recipient has visited the link' do
-        referral.link_clicked
+        allow(referral).to receive(:visited).and_return(true)
         expect(referral).to be_visited
       end
       it 'knows the recipient has purchased through referral' do
-        referral.link_clicked
-        referral.purchase_made
+        allow(referral).to receive(:visited).and_return(true)
+        allow(referral).to receive(:successful).and_return(true)
         expect(referral).to be_successful
       end
     end
@@ -51,5 +48,31 @@ RSpec.describe Referral, type: :model do
 
   describe 'referral status feed text' do
 
+    context 'self_referral' do
+      it 'returns self_referral text' do
+        text = 'You tried to refer yourself! Whoops!'
+        expect(self_referral.to_activity_feed).to eq(text)
+      end
+    end
+
+    context 'visited' do
+      it 'returns visit text' do
+        allow(referral).to receive(:visited).and_return(true)
+
+        text = "A friend visited your link, but didn't earn you a reward!"
+        expect(referral.to_activity_feed).to eq(text)
+      end
+    end
+
+    context 'visited and purchased' do
+      it 'returns purchase text' do
+        allow(referral).to receive(:visited).and_return(true)
+        allow(referral).to receive(:successful).and_return(true)
+
+        text = "Your friend #{recipient.name} earned you a reward!"
+        expect(referral.to_activity_feed).to eq(text)
+      end
+    end
   end
+
 end
