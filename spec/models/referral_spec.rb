@@ -4,10 +4,10 @@ RSpec.describe Referral, type: :model do
   let(:sender) { FactoryBot.build_stubbed(:user) }
   let(:recipient) { FactoryBot.build_stubbed(:user, name: 'Bob Lin', email: 'bl@mail.com') }
   let(:referral) { FactoryBot.build_stubbed(:referral, from_user: sender,
-                            to_user: recipient, referral_token: 'abcde') }
+                            to_user: recipient) }
 
   let(:self_referral) {FactoryBot.build_stubbed(:referral, from_user: sender,
-                            to_user: sender, referral_token: '12345')}
+                            to_user: sender)}
 
   describe 'initialization' do
     it 'knows who the sender is' do
@@ -21,6 +21,11 @@ RSpec.describe Referral, type: :model do
     end
     it 'defaults purchase status to false' do
       expect(referral).not_to be_successful
+    end
+    it 'has a unique token used for generating a unique share link' do
+      # requires create() because of using has_secure_token to generate the token
+      ref = FactoryBot.create(:referral, from_user: sender, to_user: recipient)
+      expect(ref.referral_token).not_to be_nil
     end
   end
 

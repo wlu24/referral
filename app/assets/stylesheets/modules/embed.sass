@@ -36,26 +36,9 @@
       @include media-query($desktop-screen)
         grid-row: 1 / 1
 
-    // .share-link
-    //   @include share-link
-    //   grid-column: span 12
-    //   grid-row: auto
-    //
-    //   @include media-query($desktop-screen)
-    //     grid-column: span 6
-    //     grid-row: 2 / 2
-    //
-    // .welcome
-    //   @include welcome
-    //   grid-column: span 12
-    //   grid-row: auto
-    //
-    //   @include media-query($desktop-screen)
-    //     grid-column: span 6
-    //     grid-row: 3 / 3
-    #left_row_two_container
+    #bottom_left_container
       grid-column: span 6
-      grid-row: 2 / 2
+      grid-row: 2 / 5
 
       .share-link
         @include share-link
@@ -64,6 +47,7 @@
         @include welcome
 
       .activity_feed
+        @include activity-feed
 
     // .share-link
     //   @include share-link

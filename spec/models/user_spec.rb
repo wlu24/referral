@@ -7,16 +7,16 @@ RSpec.describe User, type: :model do
   # sender with 1 referral sent
   let(:sender) { FactoryBot.build_stubbed(:user, sent_referrals: [referral] ) }
   let(:recipient) { FactoryBot.build_stubbed(:user, name: 'Abby B', email: 'al@mail.com') }
-  let(:referral) { FactoryBot.build_stubbed(:referral, to_user: recipient, referral_token: '12345') }
+  let(:referral) { FactoryBot.build_stubbed(:referral, to_user: recipient) }
 
   # sender with 3 referral sent
   let(:sender_multi_refs) { FactoryBot.build_stubbed(:user, sent_referrals:[ref1, ref2, ref3] ) }
   let(:recipient1) { FactoryBot.build_stubbed(:user, name: 'Bella C', email: 'bc@mail.com') }
   let(:recipient2) { FactoryBot.build_stubbed(:user, name: 'Chloe D', email: 'cd@mail.com') }
   let(:recipient3) { FactoryBot.build_stubbed(:user, name: 'Daisy E', email: 'de@mail.com') }
-  let(:ref1) { FactoryBot.build_stubbed(:referral, to_user: recipient1, referral_token: '1') }
-  let(:ref2) { FactoryBot.build_stubbed(:referral, to_user: recipient2, referral_token: '2') }
-  let(:ref3) { FactoryBot.build_stubbed(:referral, to_user: recipient3, referral_token: '3') }
+  let(:ref1) { FactoryBot.build_stubbed(:referral, to_user: recipient1) }
+  let(:ref2) { FactoryBot.build_stubbed(:referral, to_user: recipient2) }
+  let(:ref3) { FactoryBot.build_stubbed(:referral, to_user: recipient3) }
 
   describe 'calculating total reward point' do
     context 'no referral sent yet' do
@@ -46,7 +46,7 @@ RSpec.describe User, type: :model do
       end
       it 'knows self referrals does not count toward total reward point' do
         sender_self_ref = User.create(name: 'Self Referrer', email: 'sr@email.com')
-        sender_self_ref.sent_referrals.create(to_user: sender, referral_token: 'self_referrer')
+        sender_self_ref.sent_referrals.create(to_user: sender)
         expect(sender_self_ref.sent_referral_count).to eq(1)
         expect(sender_self_ref.total_reward_point).to eq(0)
       end
@@ -68,7 +68,7 @@ RSpec.describe User, type: :model do
       # the oldest referral and ref1 will be the most recent referral
       let(:sender_multi_refs) { FactoryBot.build_stubbed(:user, sent_referrals: [ref1, ref2, ref3, ref4] ) }
       let(:recipient4) { FactoryBot.build_stubbed(:user, name: 'Emily F', email: 'ef@mail.com') }
-      let(:ref4) {FactoryBot.build_stubbed(:referral, to_user: recipient4, referral_token: '4') }
+      let(:ref4) {FactoryBot.build_stubbed(:referral, to_user: recipient4) }
 
       it 'retrieves the three latest feeds' do
         feeds = sender_multi_refs.three_latest_feeds

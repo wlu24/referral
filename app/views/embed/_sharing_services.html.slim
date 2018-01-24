@@ -14,13 +14,13 @@
     .service
       .sender
         ' From
-        span james@buyapowa.com
+        span = @sender_email
       .recipient
         input(type="email" placeholder="Email address")
       .message
         textarea
           = "To my good friend,\n\n"
           = "Please buy the things here:\n\n"
-          = "http://the.things/abc"
+          = @share_url
       .action
         button Send email

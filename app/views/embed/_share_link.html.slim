@@ -1,5 +1,7 @@
 .share-link
   p Your unique sharing link
   .input
-    input(value="http://the.things/abc")
+    / input(value="http://the.things/abc")
+    / input(value = @unique_token )
+    input(value = @share_url )
     button 📋

@@ -6,6 +6,7 @@ class Referral < ApplicationRecord
   validates :to_user_id, presence: true
 
   # validates :from_user_id, uniqueness: { scope: :to_user_id }
+  has_secure_token :referral_token
 
   def sender
     from_user.name
@@ -65,6 +66,6 @@ class Referral < ApplicationRecord
     end
 
     def not_visited_text
-      "Your friend #{recipient} has not clicked the referral link yet"
+      "Your friend #{recipient} has not clicked the referral link yet!"
     end
 end

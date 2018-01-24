@@ -1,3 +1,28 @@
 @mixin activity-feed
-  p
-    color: red
+  background: $grey-color
+
+
+  p#header
+    font-weight: $font-weight-bold
+    padding: $activity-feed-gutter-width
+
+
+  table
+
+    tbody
+      tr
+        td
+          padding: $activity-feed-gutter-width
+
+      tr.odd
+        background: $light-grey-color
+
+  p#total_reward_text
+    text-align: right
+    padding: $activity-feed-gutter-width
+
+    span
+      margin-left: $activity-feed-gutter-width
+      margin-right: $activity-feed-gutter-width
+
+      font-weight: $font-weight-bold

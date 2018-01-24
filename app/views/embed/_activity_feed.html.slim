@@ -1,2 +1,19 @@
 .activity_feed
-  p Activity Feed
+  p id="header" Acivity feed
+
+  table
+    tbody
+      tr.odd
+        td.emoji 1
+        td.feed_text = @first_feed
+      tr
+        td.emoji 2
+        td.feed_text = @second_feed
+      tr.odd
+        td.emoji 3
+        td.feed_text = @third_feed
+
+
+  p#total_reward_text
+    | Total rewards
+    span = @total_reward_point
