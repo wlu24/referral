@@ -1,2 +1,7 @@
 h2 Referral
-p= @message
+
+
+= form_tag referrals_update_path, method: :post do
+  = hidden_field_tag :referral_token, "#{@referral_token}"
+  .action
+    button Place order

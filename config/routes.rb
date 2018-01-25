@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   get 'referrals/show/:referral_token', to: 'referrals#show', as: :referrals_show
   post 'referrals/bind_recipient', to: 'referrals#bind_recipient', as: :referrals_bind_recipient
+
+  post 'referrals/update', to: 'referrals#update'
 end

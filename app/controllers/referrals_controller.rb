@@ -1,9 +1,10 @@
 class ReferralsController < ApplicationController
   def show
-    referral = Referral.find_by_referral_token(params[:referral_token])
+
 
     if referral.present?
       referral.update_attribute(:visited, true)
+      @referral_token = params[:referral_token]
     else
       render status: 404
     end
@@ -13,7 +14,6 @@ class ReferralsController < ApplicationController
 
     unless params[:email].nil?
       recipient = User.find_by_email(params[:email])
-      referral = Referral.find_by_referral_token(params[:referral_token])
 
       return if referral.nil? || recipient.nil?
 
@@ -23,6 +23,19 @@ class ReferralsController < ApplicationController
     redirect_to root_path
 
   end
+
+  def update
+    referral.update_attribute(:successful, true)
+
+    redirect_to root_path
+  end
+
+
+  private
+
+    def referral
+      Referral.find_by_referral_token(params[:referral_token])
+    end
 
 
 end

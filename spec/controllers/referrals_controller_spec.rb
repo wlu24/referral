@@ -19,4 +19,14 @@ RSpec.describe ReferralsController, type: :controller do
     end
 
   end
+
+  describe "#update" do
+    it "sets the successful attribute on the referral to true" do
+      post :update, params: {referral_token: referral.referral_token}
+
+      referral.reload
+
+      expect(referral.successful).to be_truthy
+    end
+  end
 end
