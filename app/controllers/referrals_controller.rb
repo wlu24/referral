@@ -2,7 +2,15 @@ class ReferralsController < ApplicationController
   def show
 
 
+
+
     if referral.present?
+
+      if referral.from_user == current_user
+        flash[:message] = 'You tried to refer yourself! Whoops!'
+        return redirect_to root_path({id: current_user.id})
+      end
+
       referral.update_attribute(:visited, true)
       @referral_token = params[:referral_token]
     else

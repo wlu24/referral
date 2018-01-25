@@ -4,9 +4,11 @@ RSpec.describe ReferralsController, type: :controller do
   let(:referral) { FactoryBot.create(:referral, from_user: from_user) }
   let(:from_user) { FactoryBot.create(:user) }
 
+  let(:second_user) { FactoryBot.create(:user, name: 'abc', email: 'abc@abc.com') }
+
   describe "#show" do
     it "updates the referral visited to be true" do
-      get :show, params: {referral_token: referral.referral_token}
+      get :show, params: {referral_token: referral.referral_token, id: second_user.id}
 
       referral.reload
       expect(referral.visited).to be_truthy
@@ -16,6 +18,13 @@ RSpec.describe ReferralsController, type: :controller do
       get :show, params: {referral_token: 'abcd'}
 
       expect(response.code).to eq("404")
+    end
+
+    it 'catches self visit' do
+      get :show, params: {referral_token: referral.referral_token, id: from_user.id}
+
+      expect(flash[:message]).to eq('You tried to refer yourself! Whoops!')
+      expect(response).to redirect_to(root_path({id: from_user.id}))
     end
 
   end
