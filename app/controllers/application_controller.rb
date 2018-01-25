@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def current_user
-    @current_user = User.third
+    @current_user = User.first
   end
 
   def generate_unique_token
