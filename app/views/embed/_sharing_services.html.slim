@@ -12,34 +12,35 @@
 
 
 
-  / .services
-  /   .service
-  /     .sender
-  /       ' From
-  /       span = @sender_email
-  /
-  /     = form_tag referrals_bind_recipient_path, method: :post do
-  /       = hidden_field_tag :referral_token, "#{@referral_token}"
-  /       .recipient
-  /         = text_field_tag :email, '', type: 'email', placeholder: 'Email address', required: true
-  /       .message
-  /         = text_area_tag :message, "To my good friend,\n\nPlease buy the things here:\n\n#{@share_url}"
-  /       .action
-  /         = submit_tag 'Send email'
-
-
-
   .services
     .service
       .sender
         ' From
         span = @sender_email
-      .recipient
-        input(type="email" placeholder="Email address")
-      .message
-        textarea
-          = "To my good friend,\n\n"
-          = "Please buy the things here:\n\n"
-          = @share_url
-      .action
-        button Send email
+
+      = form_tag referrals_bind_recipient_path, method: :post do
+        .form
+          = hidden_field_tag :referral_token, "#{@referral_token}"
+          .recipient
+            = text_field_tag :email, '', type: 'email', placeholder: 'Email address', required: true
+          .message
+            = text_area_tag :message, "To my good friend,\n\nPlease buy the things here:\n\n#{@share_url}"
+          .action
+            = submit_tag 'Send email'
+
+
+
+  / .services
+  /   .service
+  /     .sender
+  /       ' From
+  /       span = @sender_email
+  /     .recipient
+  /       input(type="email" placeholder="Email address")
+  /     .message
+  /       textarea
+  /         = "To my good friend,\n\n"
+  /         = "Please buy the things here:\n\n"
+  /         = @share_url
+  /     .action
+  /       button Send email
