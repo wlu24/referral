@@ -36,18 +36,32 @@
       @include media-query($desktop-screen)
         grid-row: 1 / 1
 
-    #bottom_left_container
-      grid-column: span 6
-      grid-row: 2 / 5
+    .share-link
+      @include share-link
+      grid-column: span 12
+      grid-row: auto
 
-      .share-link
-        @include share-link
+      @include media-query($desktop-screen)
+        grid-column: span 6
+        grid-row: 2 / 2
 
-      .welcome
-        @include welcome
+    .welcome
+      @include welcome
+      grid-column: span 12
+      grid-row: auto
 
-      .activity_feed
-        @include activity-feed
+      @include media-query($desktop-screen)
+        grid-column: span 6
+        grid-row: 3 / 3
+
+    .activity_feed
+      @include activity-feed
+      grid-column: span 12
+      grid-row: auto
+
+      @include media-query($desktop-screen)
+        grid-column: span 6
+        grid-row: 4 / 4
 
     // .share-link
     //   @include share-link
